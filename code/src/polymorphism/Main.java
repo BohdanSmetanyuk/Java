@@ -15,8 +15,10 @@ package polymorphism;
 * for your new type as is does for the old types.
 * 
 * (5)Starting from Exercise 1, add a wheels() method in Cycle, which returns the
-* number of wheels. MOdify ride() to call wheels() and verify that polymorphism
+* number of wheels. Modify ride() to call wheels() and verify that polymorphism
 * works.
+* 
+* (6)
 */
 
 public class Main 
