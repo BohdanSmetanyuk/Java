@@ -8,4 +8,5 @@ public @interface TestAnnotation
 {
 	String name();
 	int count() default 1;
+	boolean flag() default false;
 }
