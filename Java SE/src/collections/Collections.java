@@ -19,9 +19,8 @@ public class Collections
 		//Collection<Integer> collection = Arrays.asList(1, 2, 3, 3, 4, 4, 5, 5, 5, 6, 7, 7, 8);
 		//System.out.println(deleteDublicates(collection));
 		//testLists();
-		Integer[] array = {1};
-		ArrayIterator<Integer> iter = new ArrayIterator<Integer>(array);
-		iter.next();
+		testSingleArrayIterator();
+
 	}
 	
 	public static Map<Character, Integer> buildFrequencyDictionary(String text, boolean toLowerCase)
@@ -46,6 +45,13 @@ public class Collections
 	public static <T> Collection<T> deleteDublicates(Collection<T> collection)
 	{
 		return new HashSet<>(collection);
+	}
+	
+	private static void testSingleArrayIterator()
+	{
+		Integer[] array = {1, 2, 3};
+		ArrayIterator<Integer> iter = new ArrayIterator<Integer>(array);
+		iter.next();
 	}
 	
 	private static void testLists()
