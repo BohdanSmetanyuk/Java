@@ -22,10 +22,10 @@
     <bean id="repMusicBean" class="mypack.RepMusic">
     </bean>
     
-    <bean id="musicBean" class="mypack.RockMusic"> <!-- ClassicalMusic, RepMusic-->
+    <bean id="musicBean" class="mypack.RockMusic" scope="prototype"> <!-- ClassicalMusic, RepMusic-->
     </bean>
     
-    <bean id="musicPlayer" class="mypack.MusicPlayer">
+    <bean id="musicPlayer" class="mypack.MusicPlayer" scope="singleton">
     	<!-- <constructor-arg ref="musicBean"/> -->
     	<!-- <property name="music" ref="musicBean" /> -->
     	<property name="playList">
@@ -42,6 +42,12 @@
     	<property name="name" value="${musicPlayer.name}" />
     	<property name="volume" value="${musicPlayer.volume}" />
     	
+    </bean>
+    
+    <bean id="newTestBean" class="mypack.NewTestBean"
+    	init-method="initMethod"
+    	destroy-method="destroyMethod"
+    	factory-method="getNewTestBean">
     </bean>
 
 </beans>
