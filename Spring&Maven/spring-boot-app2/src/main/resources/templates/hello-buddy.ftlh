@@ -6,5 +6,6 @@
 </head>
 <body>
 <h1>Hello, buddy!</h1>
+<a href="/secret">Do you wanna know something?</a>
 </body>
 </html>

@@ -11,4 +11,14 @@ public class ApplicationController {
         return "hello-buddy";
     }
 
+    @RequestMapping("/secret")
+    public String showSecret() {
+        return "secret";
+    }
+
+    @RequestMapping("/login")
+    public String showLogin() {
+        return "login";
+    }
+
 }
