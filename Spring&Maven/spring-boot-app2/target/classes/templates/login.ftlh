@@ -4,11 +4,11 @@
     <title>Spring Security Example </title>
 </head>
 <body>
-<#if RequestParameters.error>
+<#if RequestParameters.error??>
     <div>
         <strong>Invalid Login!</strong><br>Invalid username or password
     </div>
-<#elseif RequestParameters.logout>
+<#elseif RequestParameters.logout??>
     <div>
         <strong>Logged out!</strong>
     </div>
