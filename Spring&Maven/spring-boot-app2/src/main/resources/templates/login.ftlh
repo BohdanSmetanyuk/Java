@@ -19,5 +19,6 @@
     <div><label> Password: <input type="password" name="password"/> </label></div>
     <div><input type="submit" value="Sign In"/></div>
 </form>
+<a href="/registration">Registration</a>
 </body>
 </html>

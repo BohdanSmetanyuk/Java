@@ -1,7 +1,11 @@
 package com.controller;
 
+import com.entities.Role;
 import com.entities.Secret;
+import com.entities.User;
 import com.repositories.SecretRepository;
+import com.repositories.UserRepository;
+import org.hibernate.mapping.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,12 +14,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Collections;
+
 
 @Controller
 public class ApplicationController {
 
     @Autowired
     private SecretRepository secretRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @RequestMapping("/")
     public String showHello() {
@@ -41,6 +49,25 @@ public class ApplicationController {
         Iterable<Secret> secrets =  secretRepository.findAll();
         model.addAttribute("secrets", secrets);
         return "secret";
+    }
+
+    @GetMapping("/registration")
+    public String registration() {
+        return "registration";
+    }
+
+    @PostMapping("/registration")
+    public String addUser(User user, Model model) {
+        User userFromDB = userRepository.findByUsername(user.getUsername());
+        if (userFromDB != null) {
+            model.addAttribute("message", "user exists");
+            return "registration";
+        }
+
+        user.setActive(true);
+        user.setRoles(Collections.singleton(Role.USER));
+        userRepository.save(user);
+        return "redirect:/login";
     }
 
 }
