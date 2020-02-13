@@ -1,11 +1,18 @@
 package com.entities;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ElementCollection;
+import javax.persistence.Enumerated;
+import javax.persistence.EnumType;
+import javax.persistence.FetchType;
 import java.util.Set;
 
 @Entity
-//@Table(name = "users")
-public class User {
+//@Table(name = "users") // postgres don't like tables with name "user"
+public class ApplicationUser {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -16,6 +23,13 @@ public class User {
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
+
+    protected ApplicationUser() {}
+
+    public ApplicationUser(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
 
     public Long getId() {
         return id;

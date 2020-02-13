@@ -2,10 +2,9 @@ package com.controller;
 
 import com.entities.Role;
 import com.entities.Secret;
-import com.entities.User;
+import com.entities.ApplicationUser;
 import com.repositories.SecretRepository;
 import com.repositories.UserRepository;
-import org.hibernate.mapping.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -57,16 +56,18 @@ public class ApplicationController {
     }
 
     @PostMapping("/registration")
-    public String addUser(User user, Model model) {
-        User userFromDB = userRepository.findByUsername(user.getUsername());
+    public String addUser(@RequestParam String username, @RequestParam String password, Model model) {
+        ApplicationUser userFromDB = userRepository.findByUsername(username);
         if (userFromDB != null) {
             model.addAttribute("message", "user exists");
             return "registration";
         }
-
+        
+        ApplicationUser user = new ApplicationUser(username, password);
         user.setActive(true);
         user.setRoles(Collections.singleton(Role.USER));
         userRepository.save(user);
+
         return "redirect:/login";
     }
 
