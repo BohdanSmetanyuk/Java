@@ -14,7 +14,7 @@ import java.util.List;
 @Component
 public class Parser {
 
-    public List<Product> productList;
+    public List<Product> productList; // set
 
     Parser() {
         productList = new ArrayList<Product>();
@@ -24,19 +24,23 @@ public class Parser {
     public void parseNovus() {
         Document doc;
         try {
-            for (int i=1; i<=20; i++) {  // 197, 22
-                //doc = Jsoup.connect("https://novus.ua/sales.html").get();
+            for (int i=1; i<=100; i++) {  // 197
                 doc = Jsoup.connect("https://novus.ua/sales.html?p=" + i).get();
                 Element body = doc.body();
                 Elements elems = body.getElementsByClass("item product product-item");
                 for (Element elem : elems) {
                     String name = elem.getElementsByClass("product-item-link").text();
-                    Elements spans = elem.getElementsByClass("price");
-                    List<String> prices = new ArrayList<String>(); //
-                    for (Element span : spans) {                   //
-                        prices.add(span.text());                   //
+                    Elements spans = elem.getElementsByClass("price"); //
+                    if(spans.first() == spans.last()) {
+                        break;
                     }
-                    productList.add(new Product(name.toLowerCase(), prices.get(0), prices.get(1)));
+                    else {
+                        List<String> prices = new ArrayList<String>();
+                        for (Element span : spans) {
+                            prices.add(span.text());
+                        }
+                        productList.add(new Product(name.toLowerCase(), prices.get(0).replace(' ', '.'), prices.get(1).replace(' ', '.')));
+                    }
                 }
             }
             //System.out.println(body.getElementsByClass("ias-no-more").text());
