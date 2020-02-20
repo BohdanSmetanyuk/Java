@@ -23,4 +23,35 @@ public class Product {
     public String getNewPrice() {
         return newPrice;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof Product)) {
+            return false;
+        }
+        if(this.hashCode()!=((Product)obj).hashCode()) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        String hashString = name + oldPrice + newPrice;
+        int hash = 0;
+        for(int i=0; i<hashString.length(); i++) {
+            hash += (int)hashString.charAt(i) * i;
+        }
+        return hash;
+    }
+
+
+    @Override
+    public String toString() {
+        return name + ", old: " + oldPrice + ", new: " + newPrice;
+    }
+
 }

@@ -8,23 +8,27 @@ import org.springframework.stereotype.Component;
 import product.object.Product;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.LinkedHashSet;
 
 @Component
 public class Parser {
 
-    public List<Product> productList; // set
+    public Set<Product> productList;
 
     Parser() {
-        productList = new ArrayList<Product>();
+        productList = new LinkedHashSet<Product>();
         parseNovus();
     }
 
     public void parseNovus() {
         Document doc;
+        int i = 1;
         try {
-            for (int i=1; i<=100; i++) {  // 197
+            parser:
+            while(true) {  // 196
                 doc = Jsoup.connect("https://novus.ua/sales.html?p=" + i).get();
                 Element body = doc.body();
                 Elements elems = body.getElementsByClass("item product product-item");
@@ -39,11 +43,13 @@ public class Parser {
                         for (Element span : spans) {
                             prices.add(span.text());
                         }
-                        productList.add(new Product(name.toLowerCase(), prices.get(0).replace(' ', '.'), prices.get(1).replace(' ', '.')));
+                        Product product = new Product(name.toLowerCase(), prices.get(0).replace(' ', '.'), prices.get(1).replace(' ', '.'));
+                        if(!productList.add(product)) {
+                            break parser;
+                        }
                     }
                 }
             }
-            //System.out.println(body.getElementsByClass("ias-no-more").text());
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -69,7 +75,7 @@ public class Parser {
         }
     }
 
-    public List<Product> getProductList() {
+    public Set<Product> getProductList() {
         return productList;
     }
 
