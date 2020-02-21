@@ -4,8 +4,9 @@ public class Main
 {
 	public static void main(String[] args)
 	{
-		testSingleton();
-		testFactoryMethod();
+		//testSingleton();
+		//testFactoryMethod();
+		testBuilder();
 	}
 	
 	private static void testSingleton()
@@ -19,6 +20,11 @@ public class Main
 	private static void testFactoryMethod()
 	{
 		ClassFactoryMethod obj = ClassFactoryMethod.getClassFactoryMethod();
+		System.out.println(obj);
+	}
+	
+	private static void testBuilder() {
+		ClassBuilder obj = new ClassBuilder.Builder(10, 10).calories(10).sodium(10).carbohydrate(10).build();
 		System.out.println(obj);
 	}
 	

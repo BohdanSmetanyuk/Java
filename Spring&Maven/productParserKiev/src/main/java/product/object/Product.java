@@ -32,11 +32,12 @@ public class Product {
         if (!(obj instanceof Product)) {
             return false;
         }
-        if(this.hashCode()!=((Product)obj).hashCode()) {
+        if(!this.name.equals(((Product)obj).name)) {
             return false;
         }
         return true;
     }
+
 
     @Override
     public int hashCode() {

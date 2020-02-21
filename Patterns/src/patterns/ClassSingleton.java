@@ -1,6 +1,6 @@
 package patterns;
 
-public class ClassSingleton 
+public class ClassSingleton // better with enum
 {
 	 private static ClassSingleton instance;
 

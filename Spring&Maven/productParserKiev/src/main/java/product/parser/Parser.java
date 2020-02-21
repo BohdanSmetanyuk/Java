@@ -28,7 +28,7 @@ public class Parser {
         int i = 1;
         try {
             parser:
-            while(true) {  // 196
+            while(true) {
                 doc = Jsoup.connect("https://novus.ua/sales.html?p=" + i).get();
                 Element body = doc.body();
                 Elements elems = body.getElementsByClass("item product product-item");
@@ -49,6 +49,7 @@ public class Parser {
                         }
                     }
                 }
+                i++;
             }
         } catch (IOException ex) {
             ex.printStackTrace();
